@@ -1,0 +1,188 @@
+import java.util.Scanner;
+public class Bai1 {
+
+	public static void main(String[] args) {
+		int luachon = -1;
+		int[] array = new int[1000];
+		int[][] array2D = new int[1000][1000];
+        System.out.println("-----------------Menu--------------");
+        System.out.println("Enter your choice");
+        System.out.println("22.Tạo mảng 1 chiều!!");
+        System.out.println("23.Kiểm tra ma trận có phải toàn số nguyên tố không.");
+        System.out.println("24.Liệt kê các số trong khoảng từ a -> b.");
+        System.out.println("25.Hoán vị mảng.");
+        System.out.println("26.Tạo mảng 2 chiều.");
+        System.out.println("27.Xếp loại theo điểm");
+        System.out.println("28.Tính số tiền điện dựa theo số điện cũ và mới.");
+        System.out.println("29.Kiểm tra ngày có hợp lệ không");
+        System.out.println("30.Đếm số lượng ước của một số.");
+        System.out.println("31.Liệt kê số ước lẻ của một số.");
+        System.out.println("32.Kiểm tra xem phải là số nguyên tố không.");
+        System.out.println("33.Nhập vào dãy số tính tổng các số.");
+        System.out.println("34.Đếm số lẻ trong số tự nhiên N.");
+        System.out.println("35.Tổng chẵn trong số tự nhiên N.");
+        System.out.println("36.Vẽ hình chữ nhật theo chiều dai , rộng.");
+        System.out.println("--------------------------------------");
+
+        while (luachon != 0) {
+        	System.out.println("\nNhập lựa chọn hoặc 0 để thoát");
+            Scanner input = new Scanner(System.in);
+            luachon = input.nextInt();
+
+            switch (luachon) {
+                case 22:
+                	int n1;
+                	Scanner n = new Scanner(System.in);
+                	System.out.println("Nhập sô phần tử của mảng : ");
+                	n1 = n.nextInt();
+                	array = taoMang1Chieu(n1);
+                	System.out.println("Giá trị của ma trận : ");
+                	xuatM1C(array);
+                	break;
+                case 23:
+                	if (sNTTrongMang1Chieu(array) == array.length) {
+                	    System.out.println("Mảng toàn là số nguyên tố");
+                	    xuatM1C(array);
+                	} else {
+                	    System.out.println("Mảng không toàn số nguyên tố");
+                	    xuatM1C(array);
+                	}
+                	break;
+                case 24:
+                	int a , b;
+                	Scanner A = new Scanner(System.in);
+                	Scanner B = new Scanner(System.in);
+                	a = A.nextInt();
+                	b = B.nextInt();
+                	lietKeSoADenB(array , a , b);
+                	break;
+                case 25:
+                	reverse(array);
+                	xuatM1C(array);
+                	break;
+                case 26:
+                	int n2 , m2;
+                	Scanner N = new Scanner(System.in);
+                	System.out.println("Nhập sô dòng của mảng : ");
+                	n2 = N.nextInt();
+                	
+                	Scanner M = new Scanner(System.in);
+                	System.out.println("Nhập sô cột của mảng : ");
+                	m2 = M.nextInt();
+                	array2D = taoM2C(n2, m2);
+                	xuatMang2C(array2D);
+                default :
+                System.out.println("Exit process!!!");
+                System.exit(0);
+            }
+
+	}
+	}
+	
+	public static int[] taoMang1Chieu(int n)
+	{
+	    Scanner scanner = new Scanner(System.in);
+	    int[] array = new int[n];
+	    for (int i = 0 ; i < n ; i++)
+	    {
+	        System.out.print("a["+i+"] : ");
+	        array[i] = scanner.nextInt();
+	    }
+	    return array;
+	}
+
+	public static void xuatM1C(int[] array )
+	{
+		for (int i = 0 ; i < array.length ; i++)
+		{
+			System.out.print(" " + array[i]);
+		}
+	}
+	
+	public static boolean soNguyenTo(int n)
+	{
+		int count = 0;
+		if (n < 2 )
+		return false;
+
+		else {
+			for (int i = 2 ; i <= Math.sqrt(n) ; i++)
+			{
+				if (n % i == 0)
+				count++;
+			}
+		}
+		
+		if (count == 0)
+			return true;
+		else
+			return false;
+	}
+	
+	public static int sNTTrongMang1Chieu(int array[])
+	{
+		int count = 0;
+		for (int i = 0 ; i< array.length ; i++)
+		{
+			if (soNguyenTo(array[i]) == true)
+			{
+				count +=1;
+			}
+		}
+		return count;
+	}
+	
+	public static void lietKeSoADenB(int array[], int a, int b) {
+	    for (int i = a; i <= b; i++) {
+	        System.out.print(" " + array[i]);
+	    }
+	}
+
+	
+	public static void reverse(int a[]){
+	    for(int i = 0; i < a.length / 2; i++){
+	        int tmp = a[i];
+	        a[i] = a[a.length - i - 1];
+	        a[a.length - i - 1] = tmp;
+	    }
+	}
+	
+	public static int[][] taoM2C(int n , int m)
+	{
+
+	    Scanner scanner = new Scanner(System.in);
+	    int[][] array = new int[n][m];
+	    for (int i = 0 ; i < n ; i++)
+	    {
+	    	for (int j = 0 ; j < m ; j++)
+	    	{
+	    		array[i][j] = scanner.nextInt();
+	    	}
+	    }
+	    return array;
+	}
+	
+	public static void xuatMang2C(int array[][])
+	{
+		for (int i = 0 ; i < array.length ; i++) {
+			for (int j = 0 ; j < array[i].length ; j++)
+			{
+                System.out.print(array[i][j] + " ");
+			}
+        System.out.println("\n");
+		}
+	}
+	
+	public static int tongLe(int array[][])
+	{
+		int sum = 0;
+	    for (int i = 0 ; i < array.length ; i++)
+	    {
+	    	for (int j = 0 ; j < array[i].length ; j++)
+	    	{
+	    		
+	    	}
+	    }
+		return sum;
+	}
+}
